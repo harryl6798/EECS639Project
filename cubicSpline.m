@@ -47,23 +47,42 @@ end
 
 % SPLINE CALCULATIONS:
 
+splineCalcRow = (n-1)*4;
 if isequal(splineType, 'natural') % Natural Cubic Spline
-    A((n-1)*4-1,3:4) = [2 6*Xin(1)];
-    A((n-1)*4,(n-1)*4-1:(n-1)*4) = [2 6*Xin(n)];
+    A(splineCalcRow-1,3:4) = [2 6*Xin(1)];
+    A(splineCalcRow,(n-1)*4-1:(n-1)*4) = [2 6*Xin(n)];
     % Keep b values equal to 0
 elseif isequal(splineType, 'complete') % Complete Cubic Spline
-    A((n-1)*4-1,2:4) = [1 2*Xin(1) 3*Xin(1).^2];
-    A((n-1)*4,(n-1)*4-2:(n-1)*4) = [1 2*Xin(1) 3*Xin(1).^2];
-    b((n-1)*4-1:(n-1)*4) = [5 1]; % Arbitrary values
+    A(splineCalcRow-1,2:4) = [1 2*Xin(1) 3*Xin(1).^2];
+    A(splineCalcRow,(n-1)*4-2:(n-1)*4) = [1 2*Xin(1) 3*Xin(1).^2];
+    % Sets first derivate equal to the slope at the endpoints
+    b(splineCalcRow-1) = ((Yin(2)-Yin(1))/(Xin(2)-Xin(1)));
+    b(splineCalcRow) = ((Yin(n)-Yin(n-1))/(Xin(n)-Xin(n-1)));
 elseif isequal(splineType, 'not-a-knot') % Not-a-Knot Cubic Spline
-    A((n-1)*4-1,4) = 1;
-    A((n-1)*4,(n-1)*4) = -1;
+    A(splineCalcRow-1,4) = 1;
+    A(splineCalcRow-1,8) = -1;
+    A(splineCalcRow,(n-1)*4) = 1;
+    A(splineCalcRow,(n-2)*4) = -1;
 else % Error
     error("splineType is not recognized!")
 end
 
-% Calculate coeffecients
+% Calculate coeffecients using Gaussian Elmination w/ Partial Pivoting
+%   and Backwards Substitution
 coef = A\b;
+
+
+
+
+
+
+
+% Reimplement using GEPP & Back Sub!
+
+
+
+
+
 
 %
 % Calculate the spline
