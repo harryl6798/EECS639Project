@@ -9,35 +9,25 @@ function [outputArg1] = vandermonde(X,y)
 %   Function will output the resulting matrix after solving for vandermonde
 
 r = size(X);
-
+% Creates the initial Vandermonde matrix
 van = zeros(r(2),r(2));
 
+%Sets the first column 
 van(:,1) = 1;
 
+%For loop to fill the vandermonde
 for col = 2:r(2)
-    van(:,col) = X(:).^(col-1);
-    
+    van(:,col) = X(:).^(col-1);  
 end
 
+%Reverse the matrix
 g = y';
 
-c= van\g;
-
-hold on
-plot(X,y,'r.')
-r = size(c);
-Y=0;
-% Plot calculated spline
-    x = linspace(X(1),X(r(1)),50);
-    for i=1:(r(1))
-   % x = linspace(X(i),X(i+1),50);
-    Y = Y + c(i)*x.^(i-1) ;
-    end
-    plot(x,Y,'b');
+%Solve for c
+c = linsolve(van,g);
 
 
-hold off
-
+%Output
 outputArg1 = c;
 
 
