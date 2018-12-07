@@ -7,7 +7,7 @@ Y1 = exp(X1.^2);
 subplot(3,2,1);
 hold on
 [Xout, Yout] = vandermonde(X1, Y1, 200);
-title("VanderMonde Matrix");
+title("Vandermonde Matrix");
 plot(X1, Y1, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -15,11 +15,17 @@ plot(Xout, Yout, 'b');
 subplot(3,2,2);
 hold on
 [Xout, Yout] = newton(X1, Y1, 200);
-title("Newtons Method");
+title("Newton Method");
 plot(X1, Y1, 'ro');
 plot(Xout, Yout, 'b');
 
-
+% Lagrange Interpolation
+subplot(3,2,3);
+hold on
+[Xout, Yout] = lagrange(X1, Y1, 200);
+title("Lagrange Method");
+plot(X1, Y1, 'ro');
+plot(Xout, Yout, 'b');
 
 % Natural Cubic Spline
 subplot(3,2,4);
@@ -55,7 +61,7 @@ Y2 = (1+12*(X2.^2)).^(-1);
 subplot(3,2,1);
 hold on
 [Xout, Yout] = vandermonde(X2, Y2, 200);
-title("VanderMonde Matrix");
+title("Vandermonde Matrix");
 plot(X2, Y2, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -63,11 +69,17 @@ plot(Xout, Yout, 'b');
 subplot(3,2,2);
 hold on
 [Xout, Yout] = newton(X2, Y2, 200);
-title("Newtons Method");
+title("Newton Method");
 plot(X2, Y2, 'ro');
 plot(Xout, Yout, 'b');
 
-
+% Lagrange Interpolation
+subplot(3,2,3);
+hold on
+[Xout, Yout] = lagrange(X2, Y2, 200);
+title("Lagrange Method");
+plot(X2, Y2, 'ro');
+plot(Xout, Yout, 'b');
 
 % Natural Cubic Spline
 subplot(3,2,4);
@@ -104,7 +116,7 @@ Y3= [0.052 1.008 2.803 5.024 6.400 5.063 7.669 7.487 7.065 9.777];
 subplot(3,2,1);
 hold on
 [Xout, Yout] = vandermonde(X3, Y3, 200);
-title("VanderMonde Matrix");
+title("Vandermonde Matrix");
 plot(X3 + X3base, Y3 + Y3base, 'ro');
 plot(Xout + X3base, Yout + Y3base, 'b');
 
@@ -112,11 +124,17 @@ plot(Xout + X3base, Yout + Y3base, 'b');
 subplot(3,2,2);
 hold on
 [Xout, Yout] = newton(X3, Y3, 200);
-title("Newtons Method");
+title("Newton Method");
 plot(X3 + X3base, Y3 + Y3base, 'ro');
 plot(Xout + X3base, Yout + Y3base, 'b');
 
-
+% Lagrange Interpolation
+subplot(3,2,3);
+hold on
+[Xout, Yout] = lagrange(X3, Y3, 200);
+title("Lagrange Method");
+plot(X3, Y3, 'ro');
+plot(Xout, Yout, 'b');
 
 % Natural Cubic Spline
 subplot(3,2,4);
@@ -159,7 +177,7 @@ YCRainDaily = [0 0 0 0 0 0 0.04 0 0 0 0.37 0 0 0.17 0.01 0 0 0 0 0 0.13 0.05 0 0
 subplot(2,2,1)
 hold on
 [Xout, Yout] = newton(XCFive, YCTempFive, 101);
-title("Newton - Temp");
+title("Newton Interpolation - Temp");
 plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -167,7 +185,7 @@ plot(Xout, Yout, 'b');
 subplot(2,2,2)
 hold on
 [Xout, Yout] = newton(XCFive, YCRainFive, 101);
-title("Newton - Rain");
+title("Newton Interpolation - Rain");
 plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -175,7 +193,7 @@ plot(Xout, Yout, 'b');
 subplot(2,2,3)
 hold on
 [Xout, Yout] = cubicSpline(XCFive, YCTempFive, 'natural', 101);
-title("Cubic - Temp");
+title("Natural Cubic Interpolation - Temp");
 plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -183,8 +201,7 @@ plot(Xout, Yout, 'b');
 subplot(2,2,4)
 hold on
 [Xout, Yout] = cubicSpline(XCFive, YCRainFive, 'natural', 101);
-title("Cubic - Rain");
+title("Natural Cubic Interpolation - Rain");
 plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
 
- 

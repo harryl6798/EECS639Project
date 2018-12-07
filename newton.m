@@ -6,7 +6,7 @@ function [Xout, Yout] = newton(Xin,Yin, num)
 %            num - The amount of points for the output
 %   Output : Xout - The x-values of the computed data
 %            Yout - The y-values of the computed data
-%   purposes. 
+%
 
 %Calculates the size of the input
 n = length(Xin);
