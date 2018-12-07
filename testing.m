@@ -147,39 +147,44 @@ plot(Xout + X3base, Yout + Y3base, 'b');
 figure()
 
 XCFive = 0:5:100;
-YCFive = [13 34 51 13 64 61 54 24 23 65 31 51 60 46 55 47 71 47 36 50 83];
-
 XCDaily = 0:1:100;
-YCDaily = [13 23 29 27 32 34 39 50 45 55 51 20 21 33 35 13 26 41 47 52 64 47 35 52 67 61 58 41 32 52 54 42 37 52 38 24 21 32 55 47 23 35 38 51 62 65 38 57 57 67 31 28 33 37 40 51 63 71 60 56 60 69 67 57 44 46 48 63 60 46 55 54 67 78 62 47 55 49 47 56 71 64 54 52 55 47 53 46 60 64 36 38 44 47 70 50 46 38 49 65 83];
 
-% Newton Interpolation - Every Five Days
+YCTempFive = [13 34 51 13 64 61 54 24 23 65 31 51 60 46 55 47 71 47 36 50 83];
+YCTempDaily = [13 23 29 27 32 34 39 50 45 55 51 20 21 33 35 13 26 41 47 52 64 47 35 52 67 61 58 41 32 52 54 42 37 52 38 24 21 32 55 47 23 35 38 51 62 65 38 57 57 67 31 28 33 37 40 51 63 71 60 56 60 69 67 57 44 46 48 63 60 46 55 54 67 78 62 47 55 49 47 56 71 64 54 52 55 47 53 46 60 64 36 38 44 47 70 50 46 38 49 65 83];
+
+YCRainFive = [0 0 0.37 0 0.13 0 0 0 0 0 0.79 0 0 0 0 0 0 0.01 0.07 0.01 0];
+YCRainDaily = [0 0 0 0 0 0 0.04 0 0 0 0.37 0 0 0.17 0.01 0 0 0 0 0 0.13 0.05 0 0 0 0 0 0 0 0 0 0 0 0 0.01 0 0 0 0 0 0 0.01 0 0 0 0 0.01 0.03 0 0.01 0.79 0.01 0.08 0.01 0.15 0 0 0.02 0.01 0 0 0 0.01 0.01 0.01 0 0 0 0 0 0 0 0 0 0.24 0 0.03 0.95 0 0 0 0.01 0 0 0.32 0.01 0.01 0.01 0 0.01 0.07 0 0.06 0 0 0.01 0 0.06 0 0.01 0];
+
+% Newton Interpolation - Temp
 subplot(2,2,1)
 hold on
-[Xout, Yout] = newton(XCFive, YCFive, 101);
-title("Newton - 5 Days");
-plot(XCDaily, YCDaily, 'ro');
+[Xout, Yout] = newton(XCFive, YCTempFive, 101);
+title("Newton - Temp");
+plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
 
-% Newton Interpolation - Daily
+% Newton Interpolation - Rain
 subplot(2,2,2)
 hold on
-[Xout, Yout] = newton(XCDaily, YCDaily, 101);
-title("Newton - Daily");
-plot(XCDaily, YCDaily, 'ro');
+[Xout, Yout] = newton(XCFive, YCRainFive, 101);
+title("Newton - Rain");
+plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
 
-% Natural Cubic Spline - Every Five Days
+% Natural Cubic Spline - Temp
 subplot(2,2,3)
 hold on
-[Xout, Yout] = cubicSpline(XCFive, YCFive, 'natural', 101);
-title("Cubic - 5 Days");
-plot(XCDaily, YCDaily, 'ro');
+[Xout, Yout] = cubicSpline(XCFive, YCTempFive, 'natural', 101);
+title("Cubic - Temp");
+plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
 
 % Natural Cubic Spline - Daily
 subplot(2,2,4)
 hold on
-[Xout, Yout] = cubicSpline(XCDaily, YCDaily, 'natural', 101);
-title("Cubic - Daily");
-plot(XCDaily, YCDaily, 'ro');
+[Xout, Yout] = cubicSpline(XCFive, YCRainFive, 'natural', 101);
+title("Cubic - Rain");
+plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
+
+ 
