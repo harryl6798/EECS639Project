@@ -12,27 +12,22 @@ function [Xout, Yout] = newton(Xin,Yin, num)
 n = length(Xin);
 
 %Creates a matrix with just ones
-a = ones(n);
-%Sets the values to the top right to a different value
-final = tril(a);
+A = ones(n);
 
+% So we don't have to take the transpose every single time
+Xin = Xin';
 
-%Loops through the matrix twice.
-for col = 2:n
-    %Creates a new array every instance for the size
-    newSize = n - col +1;
-    newArray = zeros(newSize,1);
-    %Takes the last array instance and subtracts it
-    for t = 1: newSize
-        newArray(t) = (Xin(col+t-1) - Xin(col-1)) * final(col+t-1,col-1);
-    end
-    final(col:n,col) = newArray;  
+% Multiplies the last column by (t - tk)
+for k = 2:n
+    A(k:n,k) = A(k:n,(k-1)) .* (Xin(k:n) - Xin(k-1));
 end
+% A has ones in the top right corner, but if we tell our linsolve
+%   that the matrix is Lower-Triangular, it will ignore those 1s
+%   and solve solely using forward-sub
+opts.LT = true;
 
 % Calculate the coeffecients by using forward-sub
-opts.LT = true;
-coef = linsolve(final, Yin', opts);
-
+coef = linsolve(A, Yin', opts);
 
 % Use Horner's Nested Theorem to calculate data points
 Xout = linspace(Xin(1), Xin(n), num);

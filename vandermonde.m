@@ -16,15 +16,12 @@ van = zeros(n);
 van(:,1) = 1;
 
 %For loop to fill the vandermonde
-for col = 2:n
-    van(:,col) = Xin(:).^(col-1);  
+for k = 2:n
+    van(:,k) = Xin(:).*van(:,(k-1));  
 end
-
-%Reverse the matrix
 
 %Solves for coeffecients by using GEPP with back-sub
 coef = linsolve(van, Yin');
-
 
 % Use Horner's Nested Theorem to calculate data points
 Xout = linspace(Xin(1), Xin(n), num);
@@ -34,7 +31,6 @@ Yout = ones(1, num) * coef(n);
 for i=(n-1):-1:1
     Yout = coef(i) + (Xout .* Yout);
 end
-
 
 end
 
