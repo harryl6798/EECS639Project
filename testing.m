@@ -3,54 +3,44 @@ figure
 X1 =  linspace(.6,1,5);
 Y1 = exp(X1.^2);
 
-%VanderMonde Matrix1
+% Vandermonde Interpolation
 subplot(3,2,1);
+hold on
+[Xout, Yout] = vandermonde(X1, Y1, 200);
 title("VanderMonde Matrix");
+plot(X1, Y1, 'ro');
+plot(Xout, Yout, 'b');
 
-out = vandermonde(X1, Y1);
-hold on
-r = size(out);
-yy=0;
- xx = linspace(X1(1),X1(r(1)),50);
- for i=1:(r(1))
-    yy = yy + out(i)*xx.^(i-1) ;
- end
-plot(X1,Y1,'ro')
-plot(xx,yy,'b');
-
-%Newton Matrix 1
+% Newton Interpolation
 subplot(3,2,2);
-title("Newtons Method");
-out = Newton(X1, Y1);
 hold on
-r = size(out);
-xx = linspace(X1(1),X1(r(1)),50);
-Y3 = 0;
-for i=1:(r(1))
-   Y3 = Y3 + out(2).*(xx - X1(1)) ;
-end
-plot(X1,Y1,'ro')
-plot(xx,yy,'b');
+[Xout, Yout] = newton(X1, Y1, 200);
+title("Newtons Method");
+plot(X1, Y1, 'ro');
+plot(Xout, Yout, 'b');
 
 
+
+% Natural Cubic Spline
 subplot(3,2,4);
 hold on
-[Xout, Yout] = cubicSpline(X1, Y1, 'natural');
+[Xout, Yout] = cubicSpline(X1, Y1, 'natural', 200);
 title("Natural Cubic Spline");
 plot(X1, Y1, 'ro');
 plot(Xout, Yout, 'b');
 
+% Complete Cubic Spline
 subplot(3,2,5);
 hold on
-[Xout, Yout] = cubicSpline(X1, Y1, 'complete');
+[Xout, Yout] = cubicSpline(X1, Y1, 'complete', 200);
 title("Complete Cubic Spline");
 plot(X1, Y1, 'ro');
 plot(Xout, Yout, 'b');
 
-
+% Not-a-Knot Cubic Spline
 subplot(3,2,6);
 hold on
-[Xout, Yout] = cubicSpline(X1, Y1, 'not-a-knot');
+[Xout, Yout] = cubicSpline(X1, Y1, 'not-a-knot', 200);
 title("Not-a-Knot Cubic Spline");
 plot(X1, Y1, 'ro');
 plot(Xout, Yout, 'b');
@@ -61,52 +51,44 @@ figure
 X2 = linspace(-1,1,15);
 Y2 = (1+12*(X2.^2)).^(-1);
 
-
-%VanderMonde Matrix1
+% Vandermonde Interpolation
 subplot(3,2,1);
+hold on
+[Xout, Yout] = vandermonde(X2, Y2, 200);
 title("VanderMonde Matrix");
-out = vandermonde(X2, Y2);
-hold on
-r = size(out);
-yy=0;
- xx = linspace(X2(1),X2(r(1)),50);
- for i=1:(r(1))
-    yy = yy + out(i)*xx.^(i-1) ;
- end
-plot(X2,Y2,'ro')
-plot(xx,yy,'b');
+plot(X2, Y2, 'ro');
+plot(Xout, Yout, 'b');
 
-%Newton Matrix 1
+% Newton Interpolation
 subplot(3,2,2);
-title("Newtons Method");
-out = Newton(X2, Y2);
 hold on
-r = size(out);
-xx = linspace(X2(1),X2(r(1)),50);
-Y3 = 0;
-for i=1:(r(1))
-   Y3 = Y3 + out(2).*(xx - X2(1)) ;
-end
-plot(X2,Y2,'ro')
-plot(xx,yy,'b');
+[Xout, Yout] = newton(X2, Y2, 200);
+title("Newtons Method");
+plot(X2, Y2, 'ro');
+plot(Xout, Yout, 'b');
 
+
+
+% Natural Cubic Spline
 subplot(3,2,4);
 hold on
-[Xout, Yout] = cubicSpline(X2, Y2, 'natural');
+[Xout, Yout] = cubicSpline(X2, Y2, 'natural', 200);
 title("Natural Cubic Spline");
 plot(X2, Y2, 'ro');
 plot(Xout, Yout, 'b');
 
+% Complete Cubic Spline
 subplot(3,2,5);
 hold on
-[Xout, Yout] = cubicSpline(X2, Y2, 'complete');
+[Xout, Yout] = cubicSpline(X2, Y2, 'complete', 200);
 title("Complete Cubic Spline");
 plot(X2, Y2, 'ro');
 plot(Xout, Yout, 'b');
 
+% Not-a-Knot Cubic Spline
 subplot(3,2,6);
 hold on
-[Xout, Yout] = cubicSpline(X2, Y2, 'not-a-knot');
+[Xout, Yout] = cubicSpline(X2, Y2, 'not-a-knot', 200);
 title("Not-a-Knot Cubic Spline");
 plot(X2, Y2, 'ro');
 plot(Xout, Yout, 'b');
@@ -118,52 +100,52 @@ X3= [0 1 2 3 4 5 6 7 8 9];
 Y3base = 67;
 Y3= [0.052 1.008 2.803 5.024 6.400 5.063 7.669 7.487 7.065 9.777];
 
-%VanderMonde Matrix1
+% Vandermonde Interpolation
 subplot(3,2,1);
+hold on
+[Xout, Yout] = vandermonde(X3, Y3, 200);
 title("VanderMonde Matrix");
-out = vandermonde(X3, Y3);
-hold on
-r = size(out);
-yy=0;
- xx = linspace(X3(1),X3(r(1)),50);
- for i=1:(r(1))
-    yy = yy + out(i)*xx.^(i-1) ;
- end
 plot(X3 + X3base, Y3 + Y3base, 'ro');
-plot(xx + X3base, yy + Y3base, 'b');
+plot(Xout + X3base, Yout + Y3base, 'b');
 
-%Newton Matrix 1
+% Newton Interpolation
 subplot(3,2,2);
-title("Newtons Method");
-out = Newton(X3, Y3);
 hold on
-r = size(out);
-xx = linspace(X3(1),X3(r(1)),50);
-yy = 0;
-for i=1:(r(1))
-   yy = yy + out(2).*(xx - X3(1)) ;
-end
+[Xout, Yout] = newton(X3, Y3, 200);
+title("Newtons Method");
 plot(X3 + X3base, Y3 + Y3base, 'ro');
-plot(xx + X3base, yy + Y3base, 'b');
+plot(Xout + X3base, Yout + Y3base, 'b');
 
 
+
+% Natural Cubic Spline
 subplot(3,2,4);
 hold on
-[Xout, Yout] = cubicSpline(X3, Y3, 'natural');
+[Xout, Yout] = cubicSpline(X3, Y3, 'natural', 200);
 title("Natural Cubic Spline");
 plot(X3 + X3base, Y3 + Y3base, 'ro');
 plot(Xout + X3base, Yout + Y3base, 'b');
 
+% Complete Cubic Spline
 subplot(3,2,5);
 hold on
-[Xout, Yout] = cubicSpline(X3, Y3, 'complete');
+[Xout, Yout] = cubicSpline(X3, Y3, 'complete', 200);
 title("Complete Cubic Spline");
 plot(X3 + X3base, Y3 + Y3base, 'ro');
 plot(Xout + X3base, Yout + Y3base, 'b');
 
+% Not-a-Knot Cubic Spline
 subplot(3,2,6);
 hold on
-[Xout, Yout] = cubicSpline(X3, Y3, 'not-a-knot');
+[Xout, Yout] = cubicSpline(X3, Y3, 'not-a-knot', 200);
 title("Not-a-Knot Cubic Spline");
 plot(X3 + X3base, Y3 + Y3base, 'ro');
 plot(Xout + X3base, Yout + Y3base, 'b');
+
+
+% Part C Evaluations 
+% figure()
+% 
+% XC = 0:5:100;
+% YC = [13 34 51 13 64 61 54 24 23 65 31 51 60 46 55 47 71 47 36 50 83];
+%YC = [13 23 29 27 32 34 39 50 45 55 51 20 21 33 35 13 26 41 47 52 64 47 35 52 67 61 58 41 32 52 54 42 37 52 38 24 21 32 55 47 23 35 38 51 62 65 38 57 57 67 31 28 33 37 40 51 63 71 60 56 60 69 67 57 44 46 48 63 60 46 55 54 67 78 62 47 55 49 47 56 71 64 54 52 55 47 53 46 60 64 36 38 44 47 70 50 46 38 49 65 83]

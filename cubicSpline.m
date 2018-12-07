@@ -1,17 +1,16 @@
-function [Xout,Yout] = cubicSpline(Xin,Yin,splineType)
+function [Xout,Yout] = cubicSpline(Xin,Yin,splineType, num)
 % Creates the cubic spline from the given data
 %
-% Input:
-% X = x-values of the data
-% Y = corresponding y-values of the data
-% splineType = type of cubic spline to use
-%              'natural' for natural cubic spline
-%              'complete' for complete cubic spline
-%              'not-a-knot' for not-a-knot cubic spline
+%   Input: Xin - x-values of the data
+%          Yin - corresponding y-values of the data
+%          splineType - type of cubic spline to use
+%               + 'natural' for natural cubic spline
+%               + 'complete' for complete cubic spline
+%               + 'not-a-knot' for not-a-knot cubic spline
+%          num - The amount of points for the output
 %
-% Output:
-% Plots the computed cubic spline with the data passed in
-
+%   Output : Xout - The x-values of the computed data
+%            Yout - The y-values of the computed data
 %
 % Calculate the coeffecients for the spline equations
 %
@@ -69,26 +68,13 @@ end
 
 % Calculate coeffecients using Gaussian Elmination w/ Partial Pivoting
 %   and Backwards Substitution
-coef = A\b;
-
-
-
-
-
-
-
-% Reimplement using GEPP & Back Sub!
-
-
-
-
-
+coef = linsolve(A, b);
 
 %
 % Calculate the spline
 %
 
-step = 50;
+step = fix(num / (n-1)); % Need an integer value
 Xout = zeros((n-1) * step, 1);
 Yout = zeros((n-1) * step, 1);
 for i=1:(n-1)
