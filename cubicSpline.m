@@ -74,9 +74,11 @@ coef = linsolve(A, b);
 % Calculate the spline
 %
 
-step = fix(num / (n-1)); % Need an integer value
+% step tells how many points in each p(x)
+step = fix(num / (n-1)); % Need an integer value,
 Xout = zeros((n-1) * step, 1);
 Yout = zeros((n-1) * step, 1);
+% Calculate values of Yout from pi(x)
 for i=1:(n-1)
     x = linspace(Xin(i),Xin(i+1),step);
     y = coef(i*4-3) + coef(i*4-2)*x + coef(i*4-1)*(x.^2) + coef(i*4)*(x.^3);
