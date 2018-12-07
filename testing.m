@@ -178,6 +178,8 @@ subplot(2,2,1)
 hold on
 [Xout, Yout] = newton(XCFive, YCTempFive, 101);
 title("Newton Interpolation - Temp");
+xlabel("Days since Jan 1");
+ylabel("Temperature (F)");
 plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -186,6 +188,8 @@ subplot(2,2,2)
 hold on
 [Xout, Yout] = newton(XCFive, YCRainFive, 101);
 title("Newton Interpolation - Rain");
+xlabel("Days since Jan 1");
+ylabel("Rainfall (in.)");
 plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -194,6 +198,8 @@ subplot(2,2,3)
 hold on
 [Xout, Yout] = cubicSpline(XCFive, YCTempFive, 'natural', 101);
 title("Natural Cubic Interpolation - Temp");
+xlabel("Days since Jan 1");
+ylabel("Temperature (F)");
 plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
 
@@ -202,6 +208,8 @@ subplot(2,2,4)
 hold on
 [Xout, Yout] = cubicSpline(XCFive, YCRainFive, 'natural', 101);
 title("Natural Cubic Interpolation - Rain");
+xlabel("Days since Jan 1");
+ylabel("Rainfall (in.)");
 plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
 
