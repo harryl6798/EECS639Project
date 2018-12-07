@@ -135,7 +135,6 @@ hold on
 title("Lagrange Method");
 plot(X3, Y3, 'ro');
 plot(Xout, Yout, 'b');
-
 % Natural Cubic Spline
 subplot(3,2,4);
 hold on
@@ -182,6 +181,7 @@ xlabel("Days since Jan 1");
 ylabel("Temperature (F)");
 plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
+max(abs(Yout - YCTempDaily))
 
 % Newton Interpolation - Rain
 subplot(2,2,2)
@@ -192,6 +192,7 @@ xlabel("Days since Jan 1");
 ylabel("Rainfall (in.)");
 plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
+max(abs(Yout - YCRainDaily))
 
 % Natural Cubic Spline - Temp
 subplot(2,2,3)
@@ -202,8 +203,9 @@ xlabel("Days since Jan 1");
 ylabel("Temperature (F)");
 plot(XCDaily, YCTempDaily, 'ro');
 plot(Xout, Yout, 'b');
+max(abs(YCTempDaily - Yout))
 
-% Natural Cubic Spline - Daily
+% Natural Cubic Spline - Rain
 subplot(2,2,4)
 hold on
 [Xout, Yout] = cubicSpline(XCFive, YCRainFive, 'natural', 101);
@@ -212,4 +214,5 @@ xlabel("Days since Jan 1");
 ylabel("Rainfall (in.)");
 plot(XCDaily, YCRainDaily, 'ro');
 plot(Xout, Yout, 'b');
+max(abs(YCRainDaily - Yout))
 
